@@ -1,0 +1,42 @@
+{
+  "name": "Pipe Piper",
+  "version": "0.0.1",
+  "description": "💀 dead simple functional pipeline for typescript 🏴‍☠️",
+  "keywords": [
+    "typescript",
+    "ts-functional-pipe",
+    "pipeline",
+    "ts",
+    "pipe"
+  ],
+  "author": "https://github.com/di-sukharev",
+  "module": "index.ts",
+  "type": "module",
+  "release": {
+    "branches": [
+      "master"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "bun run index.ts",
+    "test": "bun test",
+    "watch": "npm run -S build -- --sourcemap --watch",
+    "build": "bun run build.ts",
+    "build:push": "npm run build && git add . && git commit -m 'build' && git push",
+    "deploy": "npm version patch && npm run build:push && git push --tags && npm publish --tag latest",
+    "lint": "eslint src --ext ts && tsc --noEmit",
+    "format": "prettier --write src"
+  },
+  "devDependencies": {
+    "@types/ini": "^1.3.31",
+    "bun-plugin-dts": "^0.2.1",
+    "bun-types": "^1.0.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}
