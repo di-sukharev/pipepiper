@@ -56,35 +56,34 @@ use it like this:
 
 ```ts
 interface PipelineParams {
-    travelerId: number;
-    traveler: Traveler;
-    destination: Destination;
+  travelerId: number;
+  traveler: Traveler;
+  destination: Destination;
 }
 
 function getTraveler(params: PipelineParams) {
-    const traveler = getTraveler(params.travelerId);
+  const traveler = getTraveler(params.travelerId);
 
-    return {...params, traveler};
+  return { ...params, traveler };
 }
 
 function getDestination(params: PipelineParams) {
-    const destination = getDestination(params.traveler.destinationId);
+  const destination = getDestination(params.traveler.destinationId);
 
-    return {...params, destination};
+  return { ...params, destination };
 }
 
 function driveCar(params: PipelineParams) {
-    // etc
+  // etc
 }
 
 export const travel = pipe(
   getTraveler,
   getDestination,
   driveCarToAirport,
-  fork(buyWater, buyFood, sleep)
-  flyPlane,
+  fork(buyWater, buyFood, sleep), // runs all 3 in parallel
+  flyPlane
 );
 
-travel({travelerId: 1, destination: "San Francisco"})
-
+travel({ travelerId: 1, destination: 'San Francisco' });
 ```
